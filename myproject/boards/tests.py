@@ -36,12 +36,13 @@ class BoardTopicsTests(TestCase):
         self.assertEquals(response.status_code, 200)
     
     # test if Django is returning a status code 404 (page not found) for a Board
-    # that doesnät exist in the database
+    # that doesn't exist in the database
     def test_board_topics_view_not_found_status_code(self):
         url = reverse('board_topics', kwargs={'pk': 99})
         response = self.client.get(url)
         self.assertEquals(response.status_code, 404)
     
+    # test if Django is using the correct view fucntion to render the topics
     def test_board_topics_url_resolves_board_topics_view(self):
         view = resolve('/boards/1/')
         self.assertEquals(view.func, board_topics)
