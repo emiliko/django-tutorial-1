@@ -1,44 +1,38 @@
-{% load static %}<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Boards</title>
-        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    </head>
-    <body>
-        <div class="container">
-            <!-- No idea what is going on here. Where's h1 tag?
-            what is breadcrumb? -->
-            <ol class="breadcrumb my-4">
-                <li class="breadcrumb-item active">Boards</li>
-            </ol>
+{% extends 'base.html' %}
 
-             <!-- It is an antipattern to format a website with html tables.
-            Should do this some another way. -->
+{% block breadcrumb %}
+    <li class="breadcrumb-item active">Boards</li>
+{% endblock %}
 
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>Board</th>
-                        <th>Posts</th>
-                        <th>Topics</th>
-                        <th>Last Post</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for board in boards %}
-                        <tr>
-                            <td>
-                                <a href="{% url 'board_topics' board.pk %}">{{ board.name }}</a>
-                                <small class="text-muted d-block">{{ board.description }}</small>
-                            </td>
-                            <td class="align-middle">0</td>
-                            <td class="align-middle">0</td>
-                            <td></td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table> 
-        </div> 
-    </body>
-</html>
+
+{% block content %}
+     <!-- It is an antipattern to format a website with html tables.
+    Should do this some another way. -->
+
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Board</th>
+                <th>Posts</th>
+                <th>Topics</th>
+                <th>Last Post</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for board in boards %}
+                <tr>
+                    <td>
+                        <a href="{% url 'board_topics' board.pk %}">{{ board.name }}</a>
+                        <small class="text-muted d-block">{{ board.description }}</small>
+                    </td>
+                    <td class="align-middle">0</td>
+                    <td class="align-middle">0</td>
+                    <td></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table> 
+{% endblock %}
+
+            
+                
