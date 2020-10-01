@@ -7,13 +7,14 @@
     </head>
     <body>
         <div class="container">
-            <!-- No idea what is going on here. Where's h1 tag?-->
+            <!-- No idea what is going on here. Where's h1 tag?
+            what is breadcrumb? -->
             <ol class="breadcrumb my-4">
                 <li class="breadcrumb-item active">Boards</li>
             </ol>
 
-             <!-- sisällön muotoilu taulukolla antipattern.
-            Tämä pitäisi toteuttaa jollain muulla kuin taulukolla. -->
+             <!-- It is an antipattern to format a website with html tables.
+            Should do this some another way. -->
 
             <table class="table">
                 <thead class="thead-dark">
@@ -28,8 +29,8 @@
                     {% for board in boards %}
                         <tr>
                             <td>
-                                {{ board.name }} <br>
-                                <small style="color: #888">{{ board.description }}</small>
+                                <a href="{% url 'board_topics' board.pk %}">{{ board.name }}</a>
+                                <small class="text-muted d-block">{{ board.description }}</small>
                             </td>
                             <td class="align-middle">0</td>
                             <td class="align-middle">0</td>
