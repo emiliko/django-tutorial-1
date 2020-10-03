@@ -4,6 +4,7 @@ from django.urls import resolve
 from .views import home, board_topics, new_topic
 from .models import Board, Topic, Post
 from django.contrib.auth.models import User
+from .forms import NewTopicForm
 
 
 class HomeTests(TestCase):
@@ -125,7 +126,9 @@ class NewTopicTests(TestCase):
 
         url = reverse('new_topic', kwargs={'pk': 1})
         response = self.client.post(url, {})
+        form = response.context.get('form')
         self.assertEquals(response.status_code, 200)
+        self.assertTrue(form.errors)
     
     # similar to test above, but notw sending some date
     # The application is expected to validate and reject empty subject and message
@@ -142,4 +145,10 @@ class NewTopicTests(TestCase):
         response = self.client.post(url, data)
         self.assertEquals(response.status_code, 200)
         self.assertFalse(Topic.objects.exists())
-        self.assertFalse(Post,objects.exists())
+        self.assertFalse(Post.objects.exists())
+    
+    def test_contains_form(self):
+        url = reverse('new_topic', kwargs={'pk': 1})
+        response = self.client.get(url)
+        form = response.context.get('form')
+        self.assertIsInstance(form, NewTopicForm)
