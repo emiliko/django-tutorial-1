@@ -12,11 +12,9 @@
     
 
 {% block content %}
-    <!-- Should use button tag instead, but bootstrap does seem to mess this up.
-    Probably I would have to link another css file with my own button style.-->
-    <div class="mb-4">
+    <button class="btn btn-default">
         <a href="{% url 'new_topic' board.pk %}" class="btn btn-primary">New topic</a>
-    </div>
+    </button>
 
     <table class="table">
         <thead class="thead-dark">
